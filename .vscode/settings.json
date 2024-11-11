@@ -1,0 +1,5 @@
+{
+    "javascript.suggest.completeJSDocs": false,
+    "javascript.validate.enable": false,
+    "typescript.tsserver.maxTsServerMemory": 4096
+}

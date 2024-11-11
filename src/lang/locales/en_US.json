@@ -1,0 +1,252 @@
+{
+	"home": "Home",
+	
+	"sidenav.dashboard": "Main",
+	"sidenav.dashboard.default": "Dashboard",
+	"sidenav.dashboard.analytic": "Analytic",
+	"sidenav.dashboard.sales": "Sales",
+
+	"sidenav.documents": "Documents",
+	"sidenav.documents.engineering": "Engineering",
+	"sidenav.documents.engineering.docs": "Engineering Docs",
+	"sidenav.documents.engineering.addDocs": "Add Documents Engineering",
+	"sidenav.documents.engineering.editDocs": "Edit Documents Engineering",
+	"sidenav.documents.engineering.tech": "Commisioning Docs",
+	"sidenav.documents.engineering.tech.addTech": "Add Commisioning Docs",
+	"sidenav.documents.engineering.tech.editTech": "Edit Commisioning Docs",
+
+	"sidenav.procurment": "Procurment",
+	"sidenav.procurment.vendor": "Vendor Data & Docs",
+	"sidenav.procurment.vendor.addVendor": "Add Vendor Data & Docs",
+	"sidenav.procurment.vendor.editVenddor": "Edit Vendor Data & Docs",
+
+	"sidenav.construction": "Construction",
+	"sidenav.construction.qctest": "QC Test Reports",
+	"sidenav.construction.constestreport": "Construction Test Reports",
+	"sidenav.construction.conspunchlist": "Construction Punchlist",
+	"sidenav.construction.addPunchlist": "Add Construction Punchlist",
+	"sidenav.construction.editPunchlist": "Edit Construction Punchlist",
+
+	"sidenav.commisioning": "Commisioning",
+	"sidenav.commisioning.airblowing": "Air Blowing",
+	"sidenav.commisioning.addAirblowing": "Add Air Blowing",
+	"sidenav.commisioning.editAirblowing": "Edit Air Blowing",
+	"sidenav.commisioning.airblowing.detail": "Detail Air Blowing",
+
+	"sidenav.commisioning.chemicalcleaning": "Chemical Cleaning",
+	"sidenav.commisioning.addChemicalcleaning": "Add Chemical Cleaning",
+	"sidenav.commisioning.editChemicalcleaning": "Edit Chemical Cleaning",
+
+	"sidenav.commisioning.dry_run_test": "Dry Run Test",
+	"sidenav.commisioning.addDryrun": "Add Dry Run Test",
+	"sidenav.commisioning.editDryrun": "Edit Dry Run Test",
+
+	"sidenav.commisioning.flange_manage": "Flange Management",
+	"sidenav.commisioning.addFlange": "Add Flange Management",
+	"sidenav.commisioning.editFlange": "Edit Flange Management",
+
+	"sidenav.commisioning.leak_test": "Leak Test",
+	"sidenav.commisioning.addLeakTest": "Add Leak Test",
+	"sidenav.commisioning.editLeakTest": "Edit Leak Test",
+
+	"sidenav.commisioning.motor_solo_run": "Motor Solo Run",
+	"sidenav.commisioning.addMotorSolo": "Add Motor Solo Run",
+	"sidenav.commisioning.editMotorSolo": "Edit Motor Solo Run",
+
+	"sidenav.commisioning.pipeline_cleaning": "Pipeline Cleaning",
+	"sidenav.commisioning.addPipelineCleaning": "Add Pipeline Cleaning",
+	"sidenav.commisioning.editPipelineCleaning": "Edit Pipeline Cleaning",
+
+	"sidenav.commisioning.pipeline_gauging": "Pipeline Gauging",
+	"sidenav.commisioning.addPipelineGauging": "Add Pipeline Gauging",
+	"sidenav.commisioning.editPipelineGauging": "Edit Pipeline Gauging",
+
+	"sidenav.commisioning.pump_mechanical_run": "Pump Mechanical Run",
+	"sidenav.commisioning.addPumpMechanical": "Add Pump Mechanical Run",
+	"sidenav.commisioning.editPumpMechanical": "Edit Pump Mechanical Run",
+
+	"sidenav.commisioning.water_flushing": "Water Flushing",
+	"sidenav.commisioning.addWaterFlushing": "Add Water Flushing",
+	"sidenav.commisioning.editWaterFlushing": "Edit Water Flushing",
+
+	"sidenav.commisioning.loop_function": "Loop & Function Test",
+	"sidenav.commisioning.addLoopFunction": "Add Loop & Function Test",
+	"sidenav.commisioning.editLoopFunction": "Edit Loop & Function Test",
+
+	"sidenav.commisioning.analog_test": "Analog Test",
+	"sidenav.commisioning.addAnalogTest": "Add Analog Test",
+	"sidenav.commisioning.editAnalogTest": "Edit Analog Test",
+
+	"sidenav.commisioning.digital_test": "Digital Test",
+	"sidenav.commisioning.addDigitalTest": "Add Digital Test",
+	"sidenav.commisioning.editDigitalTest": "Edit Digital Test",
+
+	"sidenav.commisioning.communication_test": "Communication Test",
+	"sidenav.commisioning.addCommunicationTest": "Add Communication Test",
+	"sidenav.commisioning.editCommunicationTest": "Edit Communication Test",
+
+	"sidenav.commisioning.control_logic_test": "Control Logic Test",
+	"sidenav.commisioning.addControlLogicTest": "Add Control Logic Test",
+	"sidenav.commisioning.editControlLogicTest": "Edit Control Logic Test",
+
+	"sidenav.commisioning.esd_test": "ESD Test",
+	"sidenav.commisioning.addEsdTest": "Add ESD Test",
+	"sidenav.commisioning.editEsdTest": "Edit ESD Test",
+
+	"sidenav.commisioning.fire_gas_logic_test": "Fire & Gas Logic Test",
+	"sidenav.commisioning.addFireGasLogicTest": "Add Fire & Gas Logic Test",
+	"sidenav.commisioning.editFireGasLogicTest": "Edit Fire & Gas Logic Test",
+	
+	"sidenav.setting": "Setting",
+	"sidenav.setting.users": "Users",
+	"sidenav.setting.addUser": "Add User",
+	"sidenav.setting.editUser": "Edit User",
+
+	"sidenav.setting.stakeholder": "Stakeholders",
+	"sidenav.setting.addStakeholder": "Add Stakeholder",
+	"sidenav.setting.editStakeholder": "Edit Stakeholder",
+
+	"sidenav.setting.owner": "Owner",
+	"sidenav.setting.addOwner": "Add Owner",
+	"sidenav.setting.editOwner": "Edit Owner",
+
+	"sidenav.setting.contractor": "Contractor",
+	"sidenav.setting.addContractor": "Add Contractor",
+	"sidenav.setting.editContractor": "Edit Contractor",
+
+	"sidenav.setting.subcontractor": "Subcontractor",
+	"sidenav.setting.addSubcontractor": "Add Subcontractor",
+	"sidenav.setting.editSubcontractor": "Edit Subcontractor",
+
+
+	"sidenav.apps": "Apps",
+	"sidenav.apps.doc.project" : "Project",
+	"sidenav.apps.doc.project.addProject" : "Add Project",
+	"sidenav.apps.doc.project.editEdit" : "Edit Project",
+
+
+
+
+
+
+
+
+	"sidenav.apps.mail": "Mail",
+	"sidenav.apps.chat": "Chat",
+	"sidenav.apps.calendar": "Calendar",
+	"sidenav.apps.project": "Project",
+	"sidenav.apps.project.list": "List",
+	"sidenav.apps.project.scrumboard": "Scrumboard",
+	"sidenav.apps.ecommerce": "E-Commerce",
+	"sidenav.apps.ecommerce.product": "Product",
+	"sidenav.apps.ecommerce.editProduct": "Edit Product",
+	"sidenav.apps.ecommerce.addProduct": "Add Product",
+	"sidenav.apps.ecommerce.productList": "Product List",
+	"sidenav.apps.ecommerce.orders": "Orders",
+
+	"sidenav.components": "Components",
+	"sidenav.components.general": "General",
+	"sidenav.components.general.button": "Button",
+	"sidenav.components.general.icon": "Icon",
+	"sidenav.components.general.typography": "Typography",
+	"sidenav.components.layout": "Layout",
+	"sidenav.components.layout.grid": "Grid",
+	"sidenav.components.layout.layout": "Layout",
+
+	"sidenav.components.navigation": "Navigation",
+	"sidenav.components.navigation.affix": "Affix",
+	"sidenav.components.navigation.breadcrumb": "Breadcrumb",
+	"sidenav.components.navigation.dropdown": "Dropdown",
+	"sidenav.components.navigation.menu": "Menu",
+	"sidenav.components.navigation.pagination": "Pagination",
+	"sidenav.components.navigation.pageHeader": "Page Header",
+	"sidenav.components.navigation.steps": "Steps",
+
+	"sidenav.components.dataEntry": "Data Entry",
+	"sidenav.components.dataEntry.autoComplete": "Auto Complete",
+	"sidenav.components.dataEntry.checkbox": "Checkbox",
+	"sidenav.components.dataEntry.cascader": "Cascader",
+	"sidenav.components.dataEntry.datePicker": "Date Picker",
+	"sidenav.components.dataEntry.form": "Form",
+	"sidenav.components.dataEntry.inputNumber": "Input Number",
+	"sidenav.components.dataEntry.input": "Input",
+	"sidenav.components.dataEntry.mentions": "Mentions",
+	"sidenav.components.dataEntry.rate": "Rate",
+	"sidenav.components.dataEntry.radio": "Radio",
+	"sidenav.components.dataEntry.switch": "Switch",
+	"sidenav.components.dataEntry.slider": "Slider",
+	"sidenav.components.dataEntry.select": "Select",
+	"sidenav.components.dataEntry.treeSelect": "Tree Select",
+	"sidenav.components.dataEntry.transfer": "Transfer",
+	"sidenav.components.dataEntry.timePicker": "Time Picker",
+	"sidenav.components.dataEntry.upload": "Upload",
+
+	"sidenav.components.dataDisplay": "Data Display",
+	"sidenav.components.dataDisplay.avatar": "Avatar",
+	"sidenav.components.dataDisplay.badge": "Badge",
+	"sidenav.components.dataDisplay.comment": "Comment",
+	"sidenav.components.dataDisplay.collapse": "Collapse",
+	"sidenav.components.dataDisplay.carousel": "Carousel",
+	"sidenav.components.dataDisplay.card": "Card",
+	"sidenav.components.dataDisplay.calendar": "Calendar",
+	"sidenav.components.dataDisplay.descriptions": "Descriptions",
+	"sidenav.components.dataDisplay.empty": "Empty",
+	"sidenav.components.dataDisplay.list": "List",
+	"sidenav.components.dataDisplay.popover": "Popover",
+	"sidenav.components.dataDisplay.statistic": "Statistic",
+	"sidenav.components.dataDisplay.tree": "Tree",
+	"sidenav.components.dataDisplay.tooltip": "Tooltip",
+	"sidenav.components.dataDisplay.timeline": "Timeline",
+	"sidenav.components.dataDisplay.tag": "Tag",
+	"sidenav.components.dataDisplay.tabs": "Tabs",
+	"sidenav.components.dataDisplay.table": "Table",
+
+	"sidenav.components.feedback": "Feedback",
+	"sidenav.components.feedback.alert": "Alert",
+	"sidenav.components.feedback.drawer": "Drawer",
+	"sidenav.components.feedback.modal": "Modal",
+	"sidenav.components.feedback.message": "Message",
+	"sidenav.components.feedback.notification": "Notification",
+	"sidenav.components.feedback.progress": "Progress",
+	"sidenav.components.feedback.popconfirm": "Popconfirm",
+	"sidenav.components.feedback.result": "Result",
+	"sidenav.components.feedback.spin": "Spin",
+	"sidenav.components.feedback.skeleton": "Skeleton",
+	
+	"sidenav.components.other": "Other",
+	"sidenav.components.other.anchor": "Anchor",
+	"sidenav.components.other.backtop": "BackTop",
+	"sidenav.components.other.configProvider": "Config Provider",
+	"sidenav.components.other.divider": "Divider",
+	
+	"sidenav.charts": "Charts",
+	"sidenav.charts.apex": "Apex Charts",
+	"sidenav.charts.chartjs": "ChartJs",
+
+	"sidenav.maps": "Maps",
+	"sidenav.maps.google": "Google Maps",
+	"sidenav.maps.simple": "Simple Maps",
+	
+	"sidenav.pages": "Pages",
+	"sidenav.pages.profile": "Profile",
+	"sidenav.pages.invoice": "Invoice",
+	"sidenav.pages.pricing": "Pricing",
+	"sidenav.pages.faq": "FAQ",
+	"sidenav.pages.setting": "Setting",
+	"sidenav.pages.userlist": "User list",
+
+	"sidenav.authentication": "Authentication",
+	"sidenav.authentication.login.1": "Login 1",
+	"sidenav.authentication.login.2": "Login 2",
+	"sidenav.authentication.register.1": "Register 1",
+	"sidenav.authentication.register.2": "Register 2",
+	"sidenav.authentication.forgetPassword": "Forget Password",
+
+	"sidenav.errors": "Errors",
+	"sidenav.errors.error.1": "Error Page 1",
+	"sidenav.errors.error.2": "Error Page 2",
+
+	"sidenav.docs": "Docs",
+	"sidenav.docs.documentation": "Documentation",
+	"sidenav.docs.changelog": "Changelog"
+}

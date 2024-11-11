@@ -1,0 +1,39 @@
+[
+	{
+        "id": 1,
+        "name": "Admin",
+        "email": "admin@gmail.com",
+        "username": "admin",
+        "password": "admin",
+        "projectName": "cijurai",
+        "role": "admin"
+    },
+    {
+        "id": 2,
+        "name": "test1",
+        "email": "owner@wikamail.id",
+        "username": "test1",
+        "password": "Wika",
+        "projectName": "cijurai",
+        "role": "owner"
+    },
+    {
+        "id": 3,
+        "name": "test2",
+        "email": "test2@gmail.com",
+        "username": "test2",
+        "password": "Wika",
+        "projectName": "cijurai",
+        "role": "contractor"
+    },
+    {
+        "id": 4,
+        "name": "test3",
+        "email": "test3@wikamail.id",
+        "username": "test3",
+        "password": "Wika",
+        "projectName": "cijurai",
+        "role": "subcontractor"
+    }
+    
+]

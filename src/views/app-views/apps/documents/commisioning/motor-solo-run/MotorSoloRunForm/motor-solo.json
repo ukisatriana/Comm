@@ -1,0 +1,161 @@
+const initialValues = {
+    projectName: '',
+    owner: '',
+    identificationNo: '',
+    system: '',
+    subSystem: '',
+    motorTagNo: '',
+    tagDescription: '',
+    motorType: '',
+    startingTime: '',
+    recordOfRotation: '',
+    recordOfSpeed: '',
+    remarks: '',
+    recordOfCurrent: [
+        {
+            rocR2: '',
+            rocR10: '',
+            rocR20: '',
+            rocR30: '',
+            rocR60: '',
+            rocR90: '',
+            rocR120: ''
+        },
+        {
+            rocY2: '',
+            rocY10: '',
+            rocY20: '',
+            rocY30: '',
+            rocY60: '',
+            rocY90: '',
+            rocY120: ''
+        },
+        {
+            rocB2: '',
+            rocB10: '',
+            rocB20: '',
+            rocB30: '',
+            rocB60: '',
+            rocB90: '',
+            rocB120: ''
+        }
+    ],
+    recordOfTemperature: [
+        {
+            rotAmbient2: '',
+            rotAmbient10: '',
+            rotAmbient20: '',
+            rotAmbient30: '',
+            rotAmbient60: '',
+            rotAmbient90: '',
+            rotAmbient120: ''
+        },
+        {
+            rotBearing2: '',
+            rotBearing10: '',
+            rotBearing20: '',
+            rotBearing30: '',
+            rotBearing60: '',
+            rotBearing90: '',
+            rotBearing120: ''
+        },
+        {
+            rotFD2: '',
+            rotFD10: '',
+            rotFD20: '',
+            rotFD30: '',
+            rotFD60: '',
+            rotFD90: '',
+            rotFD120: ''
+        },
+        {
+            rotFND2: '',
+            rotFND10: '',
+            rotFND20: '',
+            rotFND30: '',
+            rotFND60: '',
+            rotFND90: '',
+            rotFND120: ''
+        }
+    ],
+    recordOfVibration: [
+        {
+            rovX2: '',
+            rovX10: '',
+            rovX20: '',
+            rovX30: '',
+            rovX60: '',
+            rovX90: '',
+            rovX120: ''
+        },
+        {
+            rovXX2: '',
+            rovXX10: '',
+            rovXX20: '',
+            rovXX30: '',
+            rovXX60: '',
+            rovXX90: '',
+            rovXX120: ''
+        },
+        {
+            rovY2: '',
+            rovY10: '',
+            rovY20: '',
+            rovY30: '',
+            rovY60: '',
+            rovY90: '',
+            rovY120: ''
+        },
+        {
+            rovYY2: '',
+            rovYY10: '',
+            rovYY20: '',
+            rovYY30: '',
+            rovYY60: '',
+            rovYY90: '',
+            rovYY120: ''
+        },
+        {
+            rovXY2: '',
+            rovXY10: '',
+            rovXY20: '',
+            rovXY30: '',
+            rovXY60: '',
+            rovXY90: '',
+            rovXY120: ''
+        }
+    ],
+    recordOfNoise: [
+        {
+            ronDb2: '',
+            ronDb10: '',
+            ronDb20: '',
+            ronDb30: '',
+            ronDb60: '',
+            ronDb90: '',
+            ronDb120: ''
+        }
+    ],
+    testIntrumentTools: [
+        {
+            speedM: '',
+            speedY: '',
+            speedR: ''
+        },
+        {
+            ampereM: '',
+            ampereY: '',
+            ampereR: ''
+        },
+        {
+            tempM: '',
+            tempY: '',
+            tempR: ''
+        },
+        {
+            vibM: '',
+            vibY: '',
+            vibR: ''
+        },
+    ]
+}
