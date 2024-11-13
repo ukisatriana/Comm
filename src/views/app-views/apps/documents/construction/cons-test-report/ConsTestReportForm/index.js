@@ -3,101 +3,95 @@ import PageHeaderAlt from 'components/layout-components/PageHeaderAlt'
 import { Tabs, Form, Button, message } from 'antd';
 import Flex from 'components/shared-components/Flex';
 import GeneralField from './GeneralField';
-import ProductListData from "assets/data/product-list.data.json";
+import { db } from 'configs/FirebaseConfig'; // Adjust this path
+import { collection, addDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
-const getBase64 = (img, callback) => {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
+const ConsTestReporForm = ({ mode = 'ADD', param }) => {
+  const [form] = Form.useForm();
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [uploadedFileURL, setUploadedFileURL] = useState(null);
+  const [uploadLoading, setUploadLoading] = useState(false);
+  const navigate = useNavigate();
 
-const ADD = 'ADD'
-const EDIT = 'EDIT'
+  const handleFileUpload = (url) => {
+    setUploadedFileURL(url);
+    setUploadLoading(false);
+  };
 
-const ConsTestReporForm = props => {
+  useEffect(() => {
+    if (mode === 'EDIT' && param?.id) {
+      const fetchDocument = async () => {
+        const docRef = doc(db, 'consTestReport', param.id);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const docData = docSnap.data();
+          form.setFieldsValue(docData);
+          setUploadedFileURL(docData.documentURL);
+        } else {
+          message.error('Document not found!');
+          navigate('/app/apps/documents/construction/cons-test-report/cons-test-report-list');
+        }
+      };
+      fetchDocument();
+    }
+  }, [mode, param, form, navigate]);
 
-	const { mode = ADD, param } = props
+  const onFinish = async (values) => {
+    setSubmitLoading(true);
+    try {
+      if (!uploadedFileURL) {
+        message.error('Please upload a document before submitting');
+        setSubmitLoading(false);
+        return;
+      }
 
-	const [form] = Form.useForm();
-	const [uploadedImg, setImage] = useState('')
-	const [uploadLoading, setUploadLoading] = useState(false)
-	const [submitLoading, setSubmitLoading] = useState(false)
+      const docData = {
+        ...values,
+        documentURL: uploadedFileURL,
+        updatedAt: new Date(),
+      };
 
-	useEffect(() => {
-    	if(mode === EDIT) {
-			console.log('is edit')
-			console.log('props', props)
-			const { id } = param
-			const produtId = parseInt(id)
-			const productData = ProductListData.filter( product => product.id === produtId)
-			const product = productData[0]
-			form.setFieldsValue({
-				comparePrice: 0.00,
-				cost: 0.00,
-				taxRate: 6,
-				description: 'There are many variations of passages of Lorem Ipsum available.',
-				category: product.category,
-				name: product.name,
-				price: product.price
-			});
-			setImage(product.image)
-		}
-  	}, [form, mode, param, props]);
+      if (mode === 'ADD') {
+        await addDoc(collection(db, 'consTestReport'), {
+          ...docData,
+          createdAt: new Date(),
+        });
+        message.success('Document successfully added to Cons Test Report');
+      } else {
+        const docRef = doc(db, 'consTestReport', param.id);
+        await updateDoc(docRef, docData);
+        message.success('Document successfully updated');
+      }
 
-	const handleUploadChange = info => {
-		if (info.file.status === 'uploading') {
-			setUploadLoading(true)
-			return;
-		}
-		if (info.file.status === 'done') {
-			getBase64(info.file.originFileObj, imageUrl =>{
-				setImage(imageUrl)
-				setUploadLoading(true)
-			});
-		}
-	};
-
-	const onFinish = () => {
-		setSubmitLoading(true)
-		form.validateFields().then(values => {
-			setTimeout(() => {
-				setSubmitLoading(false)
-				if(mode === ADD) {
-					message.success(`Created ${values.name} to product list`);
-				}
-				if(mode === EDIT) {
-					message.success(`Product saved`);
-				}
-			}, 1500);
-		}).catch(info => {
-			setSubmitLoading(false)
-			console.log('info', info)
-			message.error('Please enter all required field ');
-		});
-	};
+      form.resetFields();
+      navigate(`/app/apps/documents/construction/cons-test-report/cons-test-report-list`);
+    } catch (error) {
+      message.error(`Error: ${error.message}`);
+    } finally {
+      setSubmitLoading(false);
+    }
+  };
 
 	return (
 		<>
 			<Form
 				layout="vertical"
 				form={form}
-				name="advanced_search"
-				className="ant-advanced-search-form"
-				initialValues={{
-					heightUnit: 'cm',
-					widthUnit: 'cm',
-					weightUnit: 'kg'
-				}}
+				initialValues={{ projectName: '', consTestReportDocsName: '' }}
+				onFinish={onFinish}
 			>
 				<PageHeaderAlt className="border-bottom" overlap>
 					<div className="container">
 						<Flex className="py-2" mobileFlex={false} justifyContent="space-between" alignItems="center">
 							<h2 className="mb-3">{mode === 'ADD'? 'Add New Construction Test Report' : `Edit Construction Test Report`} </h2>
 							<div className="mb-3">
-								<Button className="mr-2">Discard</Button>
-								<Button type="primary" onClick={() => onFinish()} htmlType="submit" loading={submitLoading} >
-									{mode === 'ADD'? 'Add' : `Save`}
-								</Button>
+              <Button onClick={() => form.resetFields()} className="mr-2">
+									Discard
+							</Button>
+              <Button type="primary" htmlType="submit" loading={submitLoading}>
+								{mode === 'ADD' ? 'Add' : 'Save'}
+							</Button>
 							</div>
 						</Flex>
 					</div>
@@ -111,9 +105,8 @@ const ConsTestReporForm = props => {
 								label: 'General',
 								key: '1',
 								children: <GeneralField 
-									uploadedImg={uploadedImg} 
-									uploadLoading={uploadLoading} 
-									handleUploadChange={handleUploadChange}
+								handleFileUpload={handleFileUpload}
+								uploadLoading={uploadLoading}
 								/>,
 							},
 							

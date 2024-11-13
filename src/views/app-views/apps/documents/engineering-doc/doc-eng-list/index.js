@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Table, Button, Menu, } from 'antd';
+import { Card, Table, Button, Menu, message, Modal } from 'antd';
 import { EditOutlined, DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import EllipsisDropdown from 'components/shared-components/EllipsisDropdown';
 import Flex from 'components/shared-components/Flex'
 import { useNavigate } from "react-router-dom";
 import FirestoreService from 'services/FirestoreService';
+import { doc, deleteDoc } from 'firebase/firestore';
+import { db } from 'configs/FirebaseConfig';
 import utils from 'utils'
  
 
@@ -52,20 +54,38 @@ const DocEngList = () => {
 		navigate(`/app/apps/documents/engineering-doc/doc-eng-edit/${row.id}`)
 	}
 	
-	const deleteRow = row => {
-		const objKey = 'id'
-		let data = list
-		if(selectedRows.length > 1) {
-			selectedRows.forEach(elm => {
-				data = utils.deleteArrayRow(data, objKey, elm.id)
-				setList(data)
-				setSelectedRows([])
-			})
-		} else {
-			data = utils.deleteArrayRow(data, objKey, row.id)
-			setList(data)
-		}
-	}
+	const deleteRow = async (row) => {
+		Modal.confirm({
+		  title: 'Apakah anda yakin ingin menghapus dokumen ini ?',
+		  content: 'data yang dihapus tidak dapat dikembalikan',
+		  onOk: async () => {
+			try {
+			  // Delete the document from Firestore
+			  await deleteDoc(doc(db, 'engineeringDocs', row.id));
+	  
+			  // Update the local list
+			  const objKey = 'id';
+			  let data = list;
+			  if (selectedRows.length > 1) {
+				selectedRows.forEach((elm) => {
+				  data = utils.deleteArrayRow(data, objKey, elm.id);
+				});
+				setSelectedRows([]);
+			  } else {
+				data = utils.deleteArrayRow(data, objKey, row.id);
+			  }
+			  setList(data);
+	  
+			  message.success('Document deleted successfully.');
+			} catch (error) {
+			  message.error(`Error deleting document: ${error.message}`);
+			}
+		  },
+		  onCancel: () => {
+			message.info('Deletion cancelled.');
+		  },
+		});
+	  };
 
 	const tableColumns = [
 		// {

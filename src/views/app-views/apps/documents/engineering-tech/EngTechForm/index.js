@@ -8,7 +8,6 @@ import { collection, addDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 const EngTechForm = ({ mode = 'ADD', param }) => {
-
 	const [form] = Form.useForm();
 	const [submitLoading, setSubmitLoading] = useState(false);
 	const [uploadedFileURL, setUploadedFileURL] = useState(null);
@@ -37,6 +36,7 @@ const EngTechForm = ({ mode = 'ADD', param }) => {
 		  fetchDocument();
 		}
 	  }, [mode, param, form, navigate]);
+
 
 	  const onFinish = async (values) => {
 		setSubmitLoading(true);
@@ -79,7 +79,6 @@ const EngTechForm = ({ mode = 'ADD', param }) => {
 			<Form
 				layout="vertical"
 				form={form}
-				className="ant-advanced-search-form"
 				initialValues={{ projectName: '', commisioningDocsName: '' }}
 				onFinish={onFinish}
 			>
@@ -88,10 +87,12 @@ const EngTechForm = ({ mode = 'ADD', param }) => {
 						<Flex className="py-2" mobileFlex={false} justifyContent="space-between" alignItems="center">
 							<h2 className="mb-3">{mode === 'ADD'? 'Add New Commisioning Docs' : `Edit Commisioning Docs`} </h2>
 							<div className="mb-3">
-								<Button className="mr-2">Discard</Button>
-								<Button type="primary" onClick={() => onFinish()} htmlType="submit" loading={submitLoading} >
-									{mode === 'ADD'? 'Add' : `Save`}
-								</Button>
+							<Button onClick={() => form.resetFields()} className="mr-2">
+									Discard
+							</Button>
+							<Button type="primary" htmlType="submit" loading={submitLoading}>
+								{mode === 'ADD' ? 'Add' : 'Save'}
+							</Button>
 							</div>
 						</Flex>
 					</div>
@@ -105,10 +106,10 @@ const EngTechForm = ({ mode = 'ADD', param }) => {
 								label: 'General',
 								key: '1',
 								children: <GeneralField 
-									handleFileUpload={handleFileUpload}
-									uploadLoading={uploadLoading}
+								handleFileUpload={handleFileUpload}
+								uploadLoading={uploadLoading}
 								/>,
-							}
+							},
 						]}
 					/>
 				</div>
