@@ -18,7 +18,7 @@ const ProcurmentForm = ({ mode = 'ADD', param }) => {
 		setUploadedFileURL(url);
 		setUploadLoading(false);
 	};
-
+ 
 	useEffect(() => {
 		if (mode === 'EDIT' && param?.id) {
 		  const fetchDocument = async () => {

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Card, Table, Input, Button, Menu } from 'antd';
-import ProductListData from "assets/data/product-list.data.json";
+import { Card, Table, Input, Button, Menu, Modal, message } from 'antd';
 import ownerData from "assets/data/owner-data.json";
 import { EditOutlined, DeleteOutlined, SearchOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import AvatarStatus from 'components/shared-components/AvatarStatus';
@@ -8,6 +7,8 @@ import EllipsisDropdown from 'components/shared-components/EllipsisDropdown';
 import Flex from 'components/shared-components/Flex';
 import { useNavigate } from "react-router-dom";
 import FirestoreService from 'services/FirestoreService';
+import { doc, deleteDoc } from 'firebase/firestore';
+import { db } from 'configs/FirebaseConfig';
 import utils from 'utils'
 
 
@@ -57,35 +58,67 @@ const OwnerList = () => {
 		navigate(`/app/apps/stakeholder/owner/owner-edit/${row.id}`)
 	}
 	
-	const deleteRow = row => {
-		const objKey = 'id'
-		let data = list
-		if(selectedRows.length > 1) {
-			selectedRows.forEach(elm => {
-				data = utils.deleteArrayRow(data, objKey, elm.id)
-				setList(data)
-				setSelectedRows([])
-			})
-		} else {
-			data = utils.deleteArrayRow(data, objKey, row.id)
-			setList(data)
-		}
-	}
+	const deleteRow = async (row) => {
+		Modal.confirm({
+		  title: 'Apakah anda yakin ingin menghapus dokumen ini?',
+		  content: 'Data yang dihapus tidak dapat dikembalikan',
+		  onOk: async () => {
+			try {
+			  // Delete the document from Firestore
+			  await deleteDoc(doc(db, 'owners', row.id));
+	  
+			  // Delete the file from Firebase Storage
+			//   if (row.documentURL) {
+			// 	const fileRef = ref(storage, row.documentURL); // Assuming `documentURL` contains the full path
+			// 	await deleteObject(fileRef);
+			// 	message.success('File deleted successfully.');
+			//   }
+	  
+			  // Update the local list
+			  const objKey = 'id';
+			  let data = list;
+			  if (selectedRows.length > 1) {
+				selectedRows.forEach((elm) => {
+				  data = utils.deleteArrayRow(data, objKey, elm.id);
+				});
+				setSelectedRows([]);
+			  } else {
+				data = utils.deleteArrayRow(data, objKey, row.id);
+			  }
+			  setList(data);
+	  
+			  message.success('Document and file deleted successfully.');
+			} catch (error) {
+			  message.error(`Error deleting document or file: ${error.message}`);
+			}
+		  },
+		  onCancel: () => {
+			message.info('Deletion cancelled.');
+		  },
+		});
+	  };
 
 	const tableColumns = [
 		{
 			title: 'ID',
-			dataIndex: 'id'
+			dataIndex: 'id',
+			render: (text, record, index) => index + 1
 		},
 		{
 			title: 'Owner Logo',
-			dataIndex: 'ownerLogo',
+			dataIndex: 'documentURL',
 			render: (_, record) => (
-				<div className="d-flex">
-					<AvatarStatus size={60} type="square" src={record.image} name={record.name}/>
+				<div className="d-flex" >
+					<AvatarStatus
+						size={60}
+						
+						type="square"
+						src={record.documentURL} // Ensure this is the URL of the image from Firestore
+						// name={record.subcontractorName}
+					/>
 				</div>
 			),
-			sorter: (a, b) => utils.antdTableSorter(a, b, 'ownerLogo')
+			sorter: (a, b) => utils.antdTableSorter(a, b, 'documentURL')
 		},
 		{
 			title: 'Owner Name',

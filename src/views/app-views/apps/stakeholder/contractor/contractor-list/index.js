@@ -71,14 +71,14 @@ const ContractorList = () => {
 			sorter: (a, b) => utils.antdTableSorter(a, b, 'name')
 		},
 		{
-			title: 'Owner Name',
-			dataIndex: 'ownerName',
-			sorter: (a, b) => utils.antdTableSorter(a, b, 'ownerName')
+			title: 'Contractor Name',
+			dataIndex: 'contractorName',
+			sorter: (a, b) => utils.antdTableSorter(a, b, 'contractorName')
 		},
 		{
-			title: 'Owner Address',
-			dataIndex: 'ownerAddress',
-			sorter: (a, b) => utils.antdTableSorter(a, b, 'ownerAddress')
+			title: 'Contractor Address',
+			dataIndex: 'contractorAddress',
+			sorter: (a, b) => utils.antdTableSorter(a, b, 'contractorAddress')
 		},
 		
 		{

@@ -2,122 +2,96 @@ import React, { useState, useEffect } from 'react'
 import PageHeaderAlt from 'components/layout-components/PageHeaderAlt'
 import { Tabs, Form, Button, message } from 'antd';
 import Flex from 'components/shared-components/Flex';
-import { image } from 'd3-fetch';
 import OnwerField from './GeneralField';
-import FirestoreService from 'services/FirestoreService';
+import { db } from 'configs/FirebaseConfig'; // Adjust this path
+import { collection, addDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
-const getBase64 = (img, callback) => {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
-
-const ADD = 'ADD'
-const EDIT = 'EDIT'
-
-const OwnerForm = props => {
-
-	const { mode = ADD, param } = props
+const OwnerForm = ({ mode = 'ADD', param }) => {
 	const [form] = Form.useForm();
-	const [uploadedImg, setImage] = useState('')
-	const [uploadLoading, setUploadLoading] = useState(false)
-	const [submitLoading, setSubmitLoading] = useState(false)
+	const [submitLoading, setSubmitLoading] = useState(false);
+	const [uploadedFileURL, setUploadedFileURL] = useState(null);
+	const [uploadLoading, setUploadLoading] = useState(false);
 	const navigate = useNavigate();
 
-	const initialValues = {
-		ownerLogo: '',
-		ownerName: '',
-		ownerAddres: '',
-	}
-
-	useEffect(() => {
-        const fetchData = async () => {
-          if (mode === EDIT) {
-            const { id } = param;
-            try {
-              const document = await FirestoreService.getDocument('owners', id);
-              form.setFieldsValue(document);
-            } catch (error) {
-              message.error('Error fetching document: ' + error.message);
-            }
-          }
-        };
-    
-        fetchData();
-      }, [form, mode, param]);
-
-		const onReset = () => {
-			form.resetFields();
-		  };
-
-	const handleUploadChange = info => {
-		if (info.file.status === 'uploading') {
-			setUploadLoading(true)
-			return;
-		}
-		if (info.file.status === 'done') {
-			getBase64(info.file.originFileObj, imageUrl =>{
-				setImage(imageUrl)
-				setUploadLoading(true)
-			});
-		}
+	const handleFileUpload = (url) => {
+		setUploadedFileURL(url);
+		setUploadLoading(false);
 	};
 
-	const onFinish = () => {
-        setSubmitLoading(true);
-        form.validateFields().then(values => {
-          setTimeout(() => {
-            setSubmitLoading(false);
-            if (mode === ADD) {
-              message.success(`Created ${values.ownerName} to Project`);
-              navigate('/app/apps/stakeholer/owner/owner-list');
-            }
-            if (mode === EDIT) {
-              message.success(`Product saved`);
-              navigate('/app/apps/stakeholder/owner/owner-list');
-            }
-          }, 1500);
-        }).catch(info => {
-          setSubmitLoading(false);
-        });
-      };
+	useEffect(() => {
+		if (mode === 'EDIT' && param?.id) {
+		  const fetchDocument = async () => {
+			const docRef = doc(db, 'owners', param.id);
+			const docSnap = await getDoc(docRef);
+			if (docSnap.exists()) {
+			  const docData = docSnap.data();
+			  form.setFieldsValue(docData);
+			  setUploadedFileURL(docData.documentURL);
+			} else {
+			  message.error('Document not found!');
+			  navigate('/app/apps/stakeholder/owner/owner-list');
+			}
+		  };
+		  fetchDocument();
+		}
+	  }, [mode, param, form, navigate]);
 
-	   const handleFinish = async (values) => {
-        try {
-          if (mode === ADD) {
-            const docId = await FirestoreService.createDocument('owners', values);
-            message.success(`Owner created with ID: ${docId}`);
-          } else if (mode === EDIT) {
-            const { id } = param;
-            await FirestoreService.updateDocument('project', id, values);
-            message.success(`Owner updated successfully`);
-          }
-          form.resetFields();
-          onFinish();
-        } catch (error) {
-          message.error('Error creating/updating Jenis Clash: ' + error.message);
-        }
-      };
+	  const onFinish = async (values) => {
+		setSubmitLoading(true);
+		try {
+		  if (!uploadedFileURL) {
+			message.error('Please upload a document before submitting');
+			setSubmitLoading(false);
+			return;
+		  }
+	
+		  const docData = {
+			...values,
+			documentURL: uploadedFileURL,
+			updatedAt: new Date(),
+		  };
+	
+		  if (mode === 'ADD') {
+			await addDoc(collection(db, 'owners'), {
+			  ...docData,
+			  createdAt: new Date(),
+			});
+			message.success('Document successfully added to Vendor Data & Docs');
+		  } else {
+			const docRef = doc(db, 'owners', param.id);
+			await updateDoc(docRef, docData);
+			message.success('Document successfully updated');
+		  }
+	
+		  form.resetFields();
+		  navigate(`/app/apps/stakeholder/owner/owner-list`);
+		} catch (error) {
+		  message.error(`Error: ${error.message}`);
+		} finally {
+		  setSubmitLoading(false);
+		}
+	  };	
+
 	return (
 		<>
 			<Form
-				layout="vertical"
-				form={form}
-				name="advanced_search"
-				className="ant-advanced-search-form"
-				initialValues={initialValues}
-				onFinish={handleFinish}
+			layout="vertical"
+			form={form}
+			initialValues={{ownerName: '', ownerAddres: ''}}
+			onFinish={onFinish}
 			>
 				<PageHeaderAlt className="border-bottom" overlap>
 					<div className="container">
 						<Flex className="py-2" mobileFlex={false} justifyContent="space-between" alignItems="center">
 							<h2 className="mb-3">{mode === 'ADD'? 'Add New Owner' : `Edit Owner`} </h2>
 							<div className="mb-3">
-								<Button className="mr-2" onClick={onReset}>Discard</Button>
-								<Button type="primary" onClick={() => onFinish()} htmlType="submit" loading={submitLoading} >
-									{mode === 'ADD'? 'Add' : `Save`}
-								</Button>
+							<Button onClick={() => form.resetFields()} className="mr-2">
+									Discard
+							</Button>
+							<Button type="primary" htmlType="submit" loading={submitLoading}>
+								{mode === 'ADD' ? 'Add' : 'Save'}
+							</Button>
 							</div>
 						</Flex>
 					</div>
@@ -131,11 +105,10 @@ const OwnerForm = props => {
 								label: 'General',
 								key: '1',
 								children: <OnwerField 
-									uploadedImg={uploadedImg} 
-									uploadLoading={uploadLoading} 
-									handleUploadChange={handleUploadChange}
+								handleFileUpload={handleFileUpload}
+								uploadLoading={uploadLoading}
 								/>,
-							}
+							},
 						]}
 					/>
 				</div>

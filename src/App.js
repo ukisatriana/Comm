@@ -7,7 +7,7 @@ import history from './history'
 import Layouts from './layouts'
 import { THEME_CONFIG } from './configs/AppConfig';
 import './lang'
-// import mockServer from './mock'
+import mockServer from './mock'
 import FirebaseConfig from 'configs/FirebaseConfig';
 
 
